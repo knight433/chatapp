@@ -48,3 +48,19 @@
     background-color: #218838;
   }
   
+  .summarized-text {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .summarized-text h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  .summarized-text p {
+    margin: 0;
+  }
+  

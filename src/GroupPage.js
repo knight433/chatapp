@@ -12,6 +12,8 @@ function GroupPage() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [checkedMessages, setCheckedMessages] = useState({});
+  const [summarizedText, setSummarizedText] = useState('');
+  const [emotion, setEmotion] = useState('');
 
   useEffect(() => {
     // Fetch group messages when component mounts
@@ -22,9 +24,29 @@ function GroupPage() {
       setMessages(mesg);
     });
 
+    // Listen for new messages from the server
+    socket.on('new_message', (msg) => {
+      if (msg.group_id === groupName) {
+        setMessages((prevMessages) => [...prevMessages, msg]);
+      }
+    });
+
+    // Listen for summarized text from the server
+    socket.on('summatized_text', (text) => {
+      console.log(text)
+      setSummarizedText(text);
+    });
+
+    // Listen for emotion classification result
+    socket.on('emotion', (emo) => {
+      setEmotion(emo);
+    });
+
     // Cleanup on unmount
     return () => {
       socket.off('messages');
+      socket.off('new_message');
+      socket.off('summarized_text');
     };
   }, [groupName, username]);
 
@@ -47,12 +69,6 @@ function GroupPage() {
       // Send message to the backend
       socket.emit('SendMessage', messageData);
 
-      // Update local messages state immediately
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { user: username, content: newMessage },
-      ]);
-
       setNewMessage('');
     }
   };
@@ -60,6 +76,11 @@ function GroupPage() {
   const handleSendSummary = () => {
     const selectedMessages = messages.filter((msg, index) => checkedMessages[index]);
     socket.emit('messagesForSummary', { messages: selectedMessages });
+  };
+
+  const handleEmotionClassification = () => {
+    const selectedMessages = messages.filter((msg, index) => checkedMessages[index]);
+    socket.emit('emotionClassifier', { messages: selectedMessages });
   };
 
   return (
@@ -90,6 +111,19 @@ function GroupPage() {
         <button type="submit">Send</button>
       </form>
       <button onClick={handleSendSummary}>Send Selected Messages for Summary</button>
+      { summarizedText && (
+        <div className="summarized-text">
+          <h3>Summary:</h3>
+          <p>{summarizedText}</p>
+        </div>
+      )}
+      <button onClick={handleEmotionClassification}>Classify Emotion of Selected Messages</button>
+      {emotion && (
+        <div className="emotion-result">
+          <h3>Emotion Classification Result:</h3>
+          <p>{emotion}</p>
+        </div>
+      )}
     </div>
   );
 }
