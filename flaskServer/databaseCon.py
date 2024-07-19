@@ -105,6 +105,26 @@ class Groups:
             print("Group added successfully!")
         except Exception as e:
             print(f"An error occurred: {e}")
+    
+    def addNewUsers(self, groupeName: str, member):
+        # Find the group by its name
+        query = {"name": groupeName}
+        group = groups.find_one(query)
+        
+        if group:
+            # Check if the member is already in the group
+            if member not in group["members"]:
+                group["members"].append(member)
+                update_query = {"$set": {"members": group["members"]}}
+                try:
+                    groups.update_one(query, update_query)
+                    print("Member added successfully!")
+                except Exception as e:
+                    print(f"An error occurred while updating the group: {e}")
+            else:
+                print("Member is already in the group.")
+        else:
+            print("Group not found.")
 
     def getGroup(self, username='all', giveid=True):
         
@@ -120,6 +140,7 @@ class Groups:
                 return list(idlist)
             
             return list(g)
+
 
 class Messages:
 
