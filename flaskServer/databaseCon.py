@@ -41,8 +41,10 @@ class userData:
             
             users.insert_one(self.userTemplate)
             print("User added successfully!")
+            return True
         except Exception as e:
             print(f"An error occurred: {e}")
+            return False
 
     def loginAuth(self, userid, password):
 

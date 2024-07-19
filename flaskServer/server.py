@@ -92,5 +92,17 @@ def get_emotions(data):
 
     emit('emotion',emo)
 
+@socketio.on('signup')
+def sign_up(data):
+    username = data.get('username')
+    password = data.get('password')
+
+    added = userObj.addUser(username,password)
+
+    if added:
+        emit('login_response', {'status': 'success'})
+    else:
+        emit('login_response', {'status': 'error', 'message': 'Invalid username or password'})
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
