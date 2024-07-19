@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
+import './ChatPage.css'; // Import the CSS file
 
 const socket = io('http://localhost:5000');
 
@@ -36,11 +37,11 @@ function ChatPage() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="chat-container">
+      <header className="chat-header">
         <h1>Chat Application</h1>
-        <div className='loggedIn'>
-          Logged in as: {username}
+        <div className="logged-in">
+          Logged in as: <span>{username}</span>
         </div>
         <div className="groups-list">
           <h2>Your Groups</h2>

@@ -1,66 +1,101 @@
+.group-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #666;
+}
+
 .chat-window {
-    margin-bottom: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  .message {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .message p {
-    margin: 0;
-    padding-left: 10px;
-  }
-  
-  .message input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  
-  form {
-    display: flex;
-    align-items: center;
-  }
-  
-  form input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  form button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #28a745;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  form button:hover {
-    background-color: #218838;
-  }
-  
-  .summarized-text {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  .summarized-text h3 {
-    margin: 0 0 10px 0;
-  }
-  
-  .summarized-text p {
-    margin: 0;
-  }
-  
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.message input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.message p {
+  margin: 0;
+  background-color: #e0f7fa;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.message-form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.message-form input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.message-form button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.message-form button:hover {
+  background-color: #0056b3;
+}
+
+.summarized-text, .emotion-result {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.summarized-text h3, .emotion-result h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #218838;
+}

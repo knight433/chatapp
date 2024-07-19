@@ -1,0 +1,64 @@
+.chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-header {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .logged-in {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .logged-in span {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .groups-list {
+    text-align: left;
+  }
+  
+  .groups-list h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .groups-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .groups-list li {
+    margin-bottom: 10px;
+  }
+  
+  .groups-list button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .groups-list button:hover {
+    background-color: #0056b3;
+  }
+  

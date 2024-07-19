@@ -1,7 +1,7 @@
-// LoginPage.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
+import './login.css'; // Importing the CSS file
 
 const socket = io('http://localhost:5000');
 
@@ -40,24 +40,28 @@ function LoginPage() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="login-container">
+      <div className="login-content">
         <h1>Login to Chat</h1>
-        <input 
-          type="text" 
-          value={username} 
-          onChange={e => setUsername(e.target.value)} 
-          placeholder="Enter your username"
-        />
-        <input 
-          type="password" 
-          value={password} 
-          onChange={e => setPassword(e.target.value)} 
-          placeholder="Enter your password"
-        />
-        <button onClick={handleLogin}>Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </header>
+        <div className="login-form">
+          <input 
+            type="text" 
+            className="form-control" 
+            value={username} 
+            onChange={e => setUsername(e.target.value)} 
+            placeholder="Enter your username"
+          />
+          <input 
+            type="password" 
+            className="form-control" 
+            value={password} 
+            onChange={e => setPassword(e.target.value)} 
+            placeholder="Enter your password"
+          />
+          <button className="btn-primary" onClick={handleLogin}>Login</button>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+        </div>
+      </div>
     </div>
   );
 }

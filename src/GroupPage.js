@@ -32,8 +32,8 @@ function GroupPage() {
     });
 
     // Listen for summarized text from the server
-    socket.on('summatized_text', (text) => {
-      console.log(text)
+    socket.on('summarized_text', (text) => {
+      console.log(text);
       setSummarizedText(text);
     });
 
@@ -47,6 +47,7 @@ function GroupPage() {
       socket.off('messages');
       socket.off('new_message');
       socket.off('summarized_text');
+      socket.off('emotion');
     };
   }, [groupName, username]);
 
@@ -84,7 +85,7 @@ function GroupPage() {
   };
 
   return (
-    <div>
+    <div className="group-container">
       <h1>Group: {groupName}</h1>
       <h2>Logged in as: {username}</h2>
       <div className="chat-window">
@@ -101,7 +102,7 @@ function GroupPage() {
           </div>
         ))}
       </div>
-      <form onSubmit={handleSendMessage}>
+      <form onSubmit={handleSendMessage} className="message-form">
         <input
           type="text"
           value={newMessage}
@@ -111,7 +112,7 @@ function GroupPage() {
         <button type="submit">Send</button>
       </form>
       <button onClick={handleSendSummary}>Send Selected Messages for Summary</button>
-      { summarizedText && (
+      {summarizedText && (
         <div className="summarized-text">
           <h3>Summary:</h3>
           <p>{summarizedText}</p>
