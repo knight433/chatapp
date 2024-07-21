@@ -1,11 +1,13 @@
-from databaseCon import init, userData, Messages, Groups
+# from databaseCon import init, userData, Messages, Groups
+from autoComplete import NextWord
 
-init()
-userObj = userData()
-msgObj = Messages()
-grpObj = Groups()
+# init()
+# userObj = userData()
+# msgObj = Messages()
+# grpObj = Groups()
+word = NextWord()
 
-print(userObj.getusers())
+# print(userObj.getusers())
 # print(grpObj.getGroup('testUser3'))
 
 # msgObj.message('testUser3','groupID4',"this is a test message 2")
@@ -16,3 +18,6 @@ print(userObj.getusers())
 # mes = [{'user': 'testUser3', 'content': 'Overall, it was a wonderful experience.'}]
 # text = mes[0]['content']
 # print(text) # debugging
+
+next_word_predictor = NextWord()
+next_word_predictor.nextWord("i was walking", words=3)
