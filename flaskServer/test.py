@@ -5,11 +5,11 @@ userObj = userData()
 msgObj = Messages()
 grpObj = Groups()
 
-# print(userObj.getusers())
+print(userObj.getusers())
 # print(grpObj.getGroup('testUser3'))
 
-msgObj.message('testUser3','groupID4',"this is a test message 2")
-msgObj.loadallmessages()
+# msgObj.message('testUser3','groupID4',"this is a test message 2")
+# msgObj.loadallmessages()
 
 # print(msgObj.loadGroupMessages('testUser2','groupID4'))
 

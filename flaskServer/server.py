@@ -2,7 +2,8 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_socketio import SocketIO, send,emit
 from databaseCon import init, userData, Messages,Groups
-import nlp
+import emotionClassify
+import SummaryText
 
 app = Flask(__name__)
 CORS(app)
@@ -18,8 +19,8 @@ init()
 userObj = userData()
 msgObj = Messages()
 grpObj = Groups()
-sumup = nlp.Summary()
-emotion = nlp.EmotionClassifier()
+sumup = SummaryText.Summary()
+emotion = emotionClassify.EmotionClassifier()
 
 chat_messages = []
 
@@ -81,8 +82,9 @@ def get_summary(data):
     messages = data.get('messages')
     print('got messages:', messages)
     summatized_text = sumup.get_summary(messages)
+    print(summatized_text)
 
-    emit('summatized_text',summatized_text)
+    emit('summarized_text',summatized_text)
 
 @socketio.on('emotionClassifier')
 def get_emotions(data):

@@ -67,7 +67,7 @@ class userData:
         
         except Exception as e:
             print(f"An error occurred: {e}")
-            return False
+            return [False,e]
         
     def getusers(self):
         
