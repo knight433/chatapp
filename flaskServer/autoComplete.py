@@ -1,13 +1,12 @@
 import json
 import tensorflow as tf
-from tensorflow.keras.preprocessing.text import tokenizer_from_json #type: ignore 
+from tensorflow.keras.preprocessing.text import tokenizer_from_json  #type: ignore 
 from tensorflow.keras.preprocessing.sequence import pad_sequences #type: ignore 
 from tensorflow.keras.models import load_model #type: ignore 
 import numpy as np
 
 class NextWord:
     def __init__(self):
-        
         tokenizer_config_path = r'C:\programs\projects\NLP powered chatapp\web\chatapp\flaskServer\nextWord\tokenizer_config.json'
         word_index_path = r'C:\programs\projects\NLP powered chatapp\web\chatapp\flaskServer\nextWord\word_index.json'
         model_path = r'C:\programs\projects\NLP powered chatapp\web\chatapp\flaskServer\nextWord\my_model.h5'
@@ -28,7 +27,7 @@ class NextWord:
         self.model = load_model(model_path)
         self.input_length = 150
     
-    def nextWord(self, text, words=3):
+    def nextWord(self, text, words=1):
         for i in range(words):
             # Tokenize the current text
             token_text = self.tokenizer.texts_to_sequences([text])[0]
@@ -45,10 +44,6 @@ class NextWord:
             # Find the word corresponding to the predicted index
             word = self.tokenizer.index_word.get(pos)
             if word:
-                text = text + " " + word
-                print(text)
+                return word
             else:
-                print("Predicted index not found in tokenizer")
-                break
-
-
+                return None

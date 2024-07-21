@@ -14,6 +14,7 @@ function GroupPage() {
   const [checkedMessages, setCheckedMessages] = useState({});
   const [summarizedText, setSummarizedText] = useState('');
   const [emotion, setEmotion] = useState('');
+  const [nextWord, setNextWord] = useState('');
 
   useEffect(() => {
     // Fetch group messages when component mounts
@@ -42,14 +43,30 @@ function GroupPage() {
       setEmotion(emo);
     });
 
+    // Listen for next word prediction from the server
+    socket.on('next_word', (data) => {
+      setNextWord(data.next_word);
+    });
+
     // Cleanup on unmount
     return () => {
       socket.off('messages');
       socket.off('new_message');
       socket.off('summarized_text');
       socket.off('emotion');
+      socket.off('next_word');
     };
   }, [groupName, username]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (newMessage.trim()) {
+        socket.emit('predict_next_word', { text: newMessage });
+      }
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [newMessage]);
 
   const handleCheckboxChange = (index) => {
     setCheckedMessages((prevCheckedMessages) => ({
@@ -71,6 +88,7 @@ function GroupPage() {
       socket.emit('SendMessage', messageData);
 
       setNewMessage('');
+      setNextWord('');
     }
   };
 
@@ -111,6 +129,12 @@ function GroupPage() {
         />
         <button type="submit">Send</button>
       </form>
+      {nextWord && (
+        <div className="next-word">
+          <h3>Recommended Next Word:</h3>
+          <p>{nextWord}</p>
+        </div>
+      )}
       <button onClick={handleSendSummary}>Send Selected Messages for Summary</button>
       {summarizedText && (
         <div className="summarized-text">
