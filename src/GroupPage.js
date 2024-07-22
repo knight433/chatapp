@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
-import './GroupPage.css';  // Import the CSS file
+import './GroupPage.css';  
 
 const socket = io('http://localhost:5000');
 
@@ -14,7 +14,7 @@ function GroupPage() {
   const [checkedMessages, setCheckedMessages] = useState({});
   const [summarizedText, setSummarizedText] = useState('');
   const [emotion, setEmotion] = useState('');
-  const [nextWord, setNextWord] = useState('');
+  const [nextWords, setNextWords] = useState([]);
 
   useEffect(() => {
     // Fetch group messages when component mounts
@@ -45,7 +45,7 @@ function GroupPage() {
 
     // Listen for next word prediction from the server
     socket.on('next_word', (data) => {
-      setNextWord(data.next_word);
+      setNextWords(data.next_words);
     });
 
     // Cleanup on unmount
@@ -88,7 +88,7 @@ function GroupPage() {
       socket.emit('SendMessage', messageData);
 
       setNewMessage('');
-      setNextWord('');
+      setNextWords([]);
     }
   };
 
@@ -129,10 +129,10 @@ function GroupPage() {
         />
         <button type="submit">Send</button>
       </form>
-      {nextWord && (
-        <div className="next-word">
-          <h3>Recommended Next Word:</h3>
-          <p>{nextWord}</p>
+      {nextWords.length > 0 && (
+        <div className="next-words">
+          <h3>Recommended Next Words:</h3>
+          <p>{nextWords.join(', ')}</p>
         </div>
       )}
       <button onClick={handleSendSummary}>Send Selected Messages for Summary</button>

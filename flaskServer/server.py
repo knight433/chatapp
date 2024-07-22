@@ -109,8 +109,8 @@ def sign_up(data):
 @socketio.on('predict_next_word')
 def predict_next_word(data):
     text = data.get('text')
-    next_word = next_word_predictor.nextWord(text)
-    emit('next_word', {'next_word': next_word})
+    next_words = next_word_predictor.nextWords(text, top_k=3)
+    emit('next_word', {'next_words': next_words})
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

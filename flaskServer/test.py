@@ -20,4 +20,5 @@ word = NextWord()
 # print(text) # debugging
 
 next_word_predictor = NextWord()
-next_word_predictor.nextWord("i was walking", words=3)
+a = next_word_predictor.nextWords("i was walking")
+print(a) 
