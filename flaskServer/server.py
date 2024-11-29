@@ -113,4 +113,4 @@ def predict_next_word(data):
     emit('next_word', {'next_words': next_words})
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)

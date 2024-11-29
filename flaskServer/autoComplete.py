@@ -4,7 +4,8 @@ import warnings
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import tokenizer_from_json  #type: ignore 
 from tensorflow.keras.preprocessing.sequence import pad_sequences #type: ignore 
-from tensorflow.keras.models import load_model #type: ignore 
+from keras.models import load_model #type: ignore 
+
 import numpy as np
 
 
@@ -13,7 +14,7 @@ class NextWord:
         
         tokenizer_config_path = r'C:\programs\projects\NLP powered chatapp\web\chatapp\flaskServer\nextWord\tokenizer_config.json'
         word_index_path = r'C:\programs\projects\NLP powered chatapp\web\chatapp\flaskServer\nextWord\word_index.json'
-        model_path = r'C:\programs\projects\NLP powered chatapp\web\chatapp\flaskServer\nextWord\my_model.h5'
+        model_path = r'C:\programs\projects\NLP powered chatapp\web\chatapp\flaskServer\nextWord\my_model.keras'
         
         with open(tokenizer_config_path) as f:
             tokenizer_config = json.load(f)
